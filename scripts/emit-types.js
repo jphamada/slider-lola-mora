@@ -6,7 +6,7 @@ import elapsed from 'elapsed-time-logger';
 export default async function emitTypes() {
   elapsed.start('emit-types');
   await new Promise((resolve, reject) => {
-    const proc = spawn('npx', ['tsc', '-p', './tsconfig.emit.json'], {
+    const proc = spawn('npx', ['--no-install', 'tsc', '-p', './tsconfig.emit.json'], {
       stdio: 'inherit',
       shell: process.platform === 'win32',
     });
