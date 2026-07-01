@@ -115,11 +115,23 @@
 
       async function initEmbedSlider() {
         try {
-          const res = await fetch('/api/images');
-          const imagesList = await res.json();
+          let imagesList = [];
+          try {
+            const res = await fetch('/api/images');
+            if (res.ok) {
+              imagesList = await res.json();
+            }
+          } catch (e) {}
+
+          if (!imagesList || imagesList.length === 0) {
+            const res = await fetch('/images.json');
+            imagesList = await res.json();
+          }
           renderSlider(imagesList);
         } catch (err) {
           console.error("Error al cargar imágenes para embed:", err);
+          // Try rendering empty state
+          renderSlider([]);
         }
       }
 

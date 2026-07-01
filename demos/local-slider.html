@@ -356,11 +356,26 @@
 
       window.loadImages = async function() {
         try {
-          const res = await fetch('/api/images');
-          imagesList = await res.json();
+          let loaded = false;
+          try {
+            const res = await fetch('/api/images');
+            if (res.ok) {
+              imagesList = await res.json();
+              if (imagesList && imagesList.length > 0) {
+                loaded = true;
+              }
+            }
+          } catch (e) {}
+
+          if (!loaded) {
+            const res = await fetch('/images.json');
+            imagesList = await res.json();
+          }
           renderSlider();
         } catch (err) {
           console.error("Error al cargar imágenes:", err);
+          imagesList = [];
+          renderSlider();
         }
       }
 

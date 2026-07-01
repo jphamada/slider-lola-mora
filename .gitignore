@@ -22,3 +22,7 @@ src/swiper-element-bundle.ts
 .gemini
 .codex
 .opencode
+
+# Build outputs
+dist-demos
+demos/images.json

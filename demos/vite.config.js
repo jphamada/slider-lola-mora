@@ -42,4 +42,13 @@ export default {
       },
     },
   ],
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        embed: path.resolve(__dirname, 'embed.html'),
+        'local-slider': path.resolve(__dirname, 'local-slider.html'),
+      },
+    },
+  },
 };
